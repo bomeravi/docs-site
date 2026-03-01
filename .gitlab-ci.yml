@@ -1,0 +1,29 @@
+stages:
+  - deploy
+
+pages:
+  image: node:20
+  stage: deploy
+  script:
+    - npm ci
+    - |
+      PAGES_URL="${CI_PAGES_URL%/}"
+      DOCS_URL="$(printf '%s\n' "$PAGES_URL" | sed -E 's#(https?://[^/]+).*#\1#')"
+      DOCS_BASE_URL="$(printf '%s\n' "$PAGES_URL" | sed -E 's#https?://[^/]+##')"
+      if [ -z "$DOCS_BASE_URL" ]; then
+        DOCS_BASE_URL="/"
+      fi
+      case "$DOCS_BASE_URL" in
+        */) ;;
+        *) DOCS_BASE_URL="${DOCS_BASE_URL}/" ;;
+      esac
+      export DOCS_URL DOCS_BASE_URL
+      echo "DOCS_URL=$DOCS_URL"
+      echo "DOCS_BASE_URL=$DOCS_BASE_URL"
+      npm run build
+    - mv build public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

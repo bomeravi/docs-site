@@ -26,16 +26,27 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-Using SSH:
+This repo supports both GitLab Pages and GitHub Pages.
+
+### GitLab Pages
+
+- Uses `.gitlab-ci.yml`
+- Pipeline job name: `pages`
+- It auto-detects:
+  - `DOCS_URL` from `CI_PAGES_URL` origin
+  - `DOCS_BASE_URL` from `CI_PAGES_URL` path
+
+### GitHub Pages
+
+- Uses `.github/workflows/pages.yml`
+- Push to the default branch triggers deployment
+- It auto-detects:
+  - `DOCS_URL=https://<owner>.github.io`
+  - `DOCS_BASE_URL=/` for user/org pages (`<owner>.github.io`)
+  - `DOCS_BASE_URL=/repo-name/` for project pages
+
+### Manual build with custom host settings
 
 ```bash
-USE_SSH=true yarn deploy
+DOCS_URL=https://example.com DOCS_BASE_URL=/my-docs/ npm run build
 ```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
