@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import type { Config } from '@docusaurus/types';
 
 function normalizeBaseUrl(value: string): string {
@@ -8,6 +9,7 @@ function normalizeBaseUrl(value: string): string {
 
 const siteUrl = process.env.DOCS_URL ?? 'https://your-domain.com';
 const siteBaseUrl = normalizeBaseUrl(process.env.DOCS_BASE_URL ?? '/');
+const gtagTrackingId = process.env.DOCS_GTAG_ID ?? 'G-Z7VBSGGJTH';
 
 const config: Config = {
   title: 'My Docs',
@@ -32,6 +34,9 @@ const config: Config = {
           routeBasePath: '/', // serve docs at root
           sidebarPath: './sidebars.ts',
           includeCurrentVersion: true,
+        },
+        gtag: {
+          trackingID: gtagTrackingId,
         },
         blog: false,
         theme: {

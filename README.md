@@ -50,3 +50,19 @@ This repo supports both GitLab Pages and GitHub Pages.
 ```bash
 DOCS_URL=https://example.com DOCS_BASE_URL=/my-docs/ npm run build
 ```
+
+### Use `.env` for local config
+
+Create a `.env` file in the project root:
+
+```bash
+DOCS_URL=https://example.com
+DOCS_BASE_URL=/my-docs/
+DOCS_GTAG_ID=G-Z7VBSGGJTH
+```
+
+Then run:
+
+```bash
+npm run start
+```
