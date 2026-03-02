@@ -28,3 +28,13 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+@media (min-width: 997px) {
+  .navbar__items--right > [class*='colorModeToggle'] {
+    order: 2;
+  }
+
+  .navbar__items--right > .header-github-link {
+    order: 3;
+  }
+}
