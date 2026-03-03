@@ -16,6 +16,13 @@ yarn start
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
+## Pull Docs
+
+pull updated docs
+```bash
+git submodule update --remote --merge
+```
+
 ## Build
 
 ```bash
