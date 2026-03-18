@@ -30,7 +30,7 @@ const config: Config = {
       'classic',
       {
         docs: {
-          path: 'dev-docs',
+          path: 'docs',
           routeBasePath: '/', // serve docs at root
           sidebarPath: './sidebars.ts',
           includeCurrentVersion: true,
