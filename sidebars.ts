@@ -43,7 +43,7 @@ function parseSidebarMd(filePath: string): SidebarEntry[] {
 }
 
 const sidebars: SidebarsConfig = {
-  tutorialSidebar: parseSidebarMd(path.resolve('dev-docs/_sidebar.md')),
+  tutorialSidebar: parseSidebarMd(path.resolve('docs/_sidebar.md')),
 };
 
 export default sidebars;
