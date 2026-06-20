@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 function normalizeBaseUrl(value: string): string {
   if (!value || value === '/') return '/';
@@ -107,6 +108,10 @@ const config: Config = {
       defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
     },
   },
 };
