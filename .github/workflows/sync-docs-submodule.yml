@@ -1,0 +1,31 @@
+name: Sync docs submodule
+on:
+  repository_dispatch:
+    types: [docs-updated]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs-site
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update submodule to latest
+        run: |
+          git submodule update --remote --merge docs
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet --exit-code -- docs; then
+            git add docs
+            git commit -m "chore: sync docs submodule to latest"
+            git push
+          else
+            echo "No changes."
+          fi
