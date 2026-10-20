@@ -13,7 +13,7 @@ const siteBaseUrl = normalizeBaseUrl(process.env.DOCS_BASE_URL ?? '/');
 const gtagTrackingId = process.env.DOCS_GTAG_ID ?? 'G-Z7VBSGGJTH';
 
 const config: Config = {
-  title: 'My Docs',
+  title: 'Docs',
   tagline: 'Documentation',
   favicon: 'img/favicon.ico',
 
@@ -35,6 +35,8 @@ const config: Config = {
           routeBasePath: '/', // serve docs at root
           sidebarPath: './sidebars.ts',
           includeCurrentVersion: true,
+          // Match docsify heading ids so table-of-contents links work on both sites.
+          beforeDefaultRemarkPlugins: [require('./src/remark/docsify-heading-ids')],
         },
         gtag: {
           trackingID: gtagTrackingId,
